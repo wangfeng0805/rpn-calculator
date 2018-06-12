@@ -1,12 +1,14 @@
 # rpn-calculator
 Airwallex
 
-RPNCalculator
+# RPNCalculator
 CLI application in Spring Boot
 
-How to run
+# How to run
 mvn spring-boot:run
 
-How to test
-Unit tests: mvn test
-BDD tests: mvn integration-test
+# How to unit test
+mvn test
+
+# How to BDD tests: 
+mvn integration-test
