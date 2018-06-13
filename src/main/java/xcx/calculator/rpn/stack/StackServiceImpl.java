@@ -1,29 +1,37 @@
 package xcx.calculator.rpn.stack;
 
 import org.springframework.stereotype.Service;
+import xcx.calculator.rpn.operators.Operators;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 @Service
 public class StackServiceImpl implements StackService {
 
     private Stack<String> stack;
-    private String[] parts;
+    private String[] elements;
+    private final String allOperators = Operators.getAllOperators();
 
     public StackServiceImpl() {
         this.stack = new Stack<>();
-
     }
 
-    public void parseString(String line) {
-        parts = line.split(" ");
+    public String[] parse(String line) {
+        return line.split("\\s");
     }
 
     public Stack<String> convertToStack(String line) {
 
-        parseString(line);
+        elements = parse(line);
 
-        for (String part : parts) {
-            stack.push(part);
+        for (String element : elements) {
+            element = element.trim();
+            if (!allOperators.contains((element))) {
+                stack.push(element);
+            }
         }
 
         return stack;

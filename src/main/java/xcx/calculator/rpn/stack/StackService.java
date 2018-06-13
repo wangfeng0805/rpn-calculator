@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public interface StackService {
 
-    void parseString(String line);
+    String[] parse(String line);
 
     Stack<String> convertToStack(String line);
 }

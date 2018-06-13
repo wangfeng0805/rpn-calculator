@@ -17,6 +17,8 @@ public class RpnApplication {
 		ConfigurableApplicationContext ctx = SpringApplication.run(RpnApplication.class, args);
 
 		CalculatorControllerInterface calculatorController = (CalculatorControllerInterface) ctx.getBean("calculatorController");
+
+		System.out.println("\n\n[RPN RpnCalculator] Enter a white-spaced list of numbers and operators then press enter:\n>");
 		calculatorController.process();
 
 		ctx.close();
