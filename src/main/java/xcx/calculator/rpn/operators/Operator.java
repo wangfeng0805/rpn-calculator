@@ -1,7 +1,5 @@
 package xcx.calculator.rpn.operators;
 
-import xcx.calculator.rpn.exceptions.InsufficientParametersException;
-
 public enum Operator {
 
     PLUS("+"),
@@ -30,25 +28,6 @@ public enum Operator {
         return stringBuilder.toString();
     }
 
-    public static Operation getOperation(Operator operator) {
-        switch (operator) {
-            case PLUS:
-                return new PlusOperation();
-            case MINUS:
-                return new MinusOperation();
-            case MULTIPLY:
-                return new MultiplyOperation();
-            case DIVIDE:
-                return new DivideOperation();
-            case CLEAR:
-                return new ClearOperation();
-            case SQRT:
-                return new SqrtOperation();
-            default:
-                throw new RuntimeException("Invalid operator:" + operator);
-        }
-    }
-
     public static boolean isValidOperator(String operator) {
 
         for (Operator validOperator : Operator.values()) {
@@ -71,4 +50,24 @@ public enum Operator {
         return null;
     }
 
+    public static Operation getOperation(Operator operator) {
+        switch (operator) {
+            case PLUS:
+                return new PlusOperation();
+            case MINUS:
+                return new MinusOperation();
+            case MULTIPLY:
+                return new MultiplyOperation();
+            case DIVIDE:
+                return new DivideOperation();
+            case CLEAR:
+                return new ClearOperation();
+            case SQRT:
+                return new SqrtOperation();
+            case UNDO:
+                return new UndoOperation();
+            default:
+                throw new RuntimeException("Invalid operator:" + operator);
+        }
+    }
 }
