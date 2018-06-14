@@ -1,6 +1,8 @@
 package xcx.calculator.rpn.operators;
 
-public enum Operators {
+import xcx.calculator.rpn.exceptions.InsufficientParametersException;
+
+public enum Operator {
 
     PLUS("+"),
     MINUS("-"),
@@ -12,7 +14,7 @@ public enum Operators {
 
     private String operator;
 
-    Operators(String value) {
+    Operator(String value) {
         operator = value;
     }
 
@@ -22,13 +24,13 @@ public enum Operators {
 
     public static String getAllOperators() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Operators operator : Operators.values()) {
+        for (Operator operator : Operator.values()) {
             stringBuilder.append(operator.getOperator()).append(" ");
         }
         return stringBuilder.toString();
     }
 
-    public static Operation getOperation(Operators operator) {
+    public static Operation getOperation(Operator operator) {
         switch (operator) {
             case PLUS:
                 return new PlusOperation();
@@ -41,14 +43,14 @@ public enum Operators {
             case CLEAR:
                 return new ClearOperation();
             default:
-                throw new RuntimeException("Unrecognised operator:" + operator);
+                throw new RuntimeException("Invalid operator:" + operator);
         }
     }
 
-    public static boolean isValidOperator(String inputOperator) {
+    public static boolean isValidOperator(String operator) {
 
-        for (Operators validOperator : Operators.values()) {
-            if (validOperator.getOperator().equals(inputOperator)) {
+        for (Operator validOperator : Operator.values()) {
+            if (validOperator.getOperator().equals(operator)) {
                 return true;
             }
         }
@@ -56,11 +58,11 @@ public enum Operators {
         return false;
     }
 
-    public static Operators getOperator(String inputOperator) {
+    public static Operator getOperator(String operator) {
 
-        for (Operators validOp : Operators.values()) {
-            if (validOp.getOperator().equalsIgnoreCase(inputOperator)) {
-                return validOp;
+        for (Operator validOperator : Operator.values()) {
+            if (validOperator.getOperator().equals(operator)) {
+                return validOperator;
             }
         }
 

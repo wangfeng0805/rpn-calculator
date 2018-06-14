@@ -1,7 +1,7 @@
 package xcx.calculator.rpn.stack;
 
 import org.springframework.stereotype.Service;
-import xcx.calculator.rpn.operators.Operators;
+import xcx.calculator.rpn.operators.Operator;
 import java.math.BigDecimal;
 import java.util.Stack;
 
@@ -10,7 +10,7 @@ public class StackServiceImpl implements StackService {
 
     private Stack<BigDecimal> stack;
     private String[] elements;
-    private final String allOperators = Operators.getAllOperators();
+    private final String allOperators = Operator.getAllOperators();
 
     public StackServiceImpl() {
         this.stack = new Stack<>();
