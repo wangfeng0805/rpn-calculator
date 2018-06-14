@@ -2,7 +2,13 @@ package xcx.calculator.rpn.operators;
 
 public enum Operators {
 
-    PLUS("+"), MINUS("-"), MULTIPLY("*"), DIVIDE("/"), SQRT("sqrt"), CLEAR("clear"),  UNDO("undo");
+    PLUS("+"),
+    MINUS("-"),
+    MULTIPLY("*"),
+    DIVIDE("/"),
+    SQRT("sqrt"),
+    CLEAR("clear"),
+    UNDO("undo");
 
     private String operator;
 
@@ -32,21 +38,23 @@ public enum Operators {
                 return new MultiplyOperation();
             case DIVIDE:
                 return new DivideOperation();
+            case CLEAR:
+                return new ClearOperation();
             default:
-                return new PlusOperation();
+                throw new RuntimeException("Unrecognised operator:" + operator);
         }
     }
 
-//    public static boolean isValidOperator(String inputOperator) {
-//
-//        for (CalculatorOperator validOp : CalculatorOperator.values()) {
-//            if (validOp.getOperator().equalsIgnoreCase(inputOperator)) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
+    public static boolean isValidOperator(String inputOperator) {
+
+        for (Operators validOperator : Operators.values()) {
+            if (validOperator.getOperator().equals(inputOperator)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     public static Operators getOperator(String inputOperator) {
 

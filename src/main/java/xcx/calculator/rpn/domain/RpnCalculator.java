@@ -1,12 +1,13 @@
 package xcx.calculator.rpn.domain;
 
+import java.math.BigDecimal;
 import java.util.Stack;
 
 public class RpnCalculator {
 
-    private Stack<String> stack;
+    private Stack<BigDecimal> stack;
 
-    public RpnCalculator(Stack<String> stack) {
+    public RpnCalculator(Stack<BigDecimal> stack) {
         this.stack = stack;
     }
 

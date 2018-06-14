@@ -3,11 +3,11 @@ package xcx.calculator.rpn.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import xcx.calculator.rpn.operators.Operation;
 import xcx.calculator.rpn.operators.Operators;
-import xcx.calculator.rpn.operators.PlusOperation;
 import xcx.calculator.rpn.output.OutputService;
 import xcx.calculator.rpn.stack.StackService;
+
+import java.math.BigDecimal;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -15,7 +15,7 @@ import java.util.Stack;
 public class CalculatorController implements CalculatorControllerInterface {
 
     private StackService stackService;
-    private Stack<String> stack;
+    private Stack<BigDecimal> stack;
     private OutputService outputService;
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -40,11 +40,12 @@ public class CalculatorController implements CalculatorControllerInterface {
             String[] stackArray = stackService.parse(line);
             for (String s : stackArray) {
                 if (!Operators.getAllOperators().contains(s)) {
-                    stack.push(s);
+                    stack.push(new BigDecimal(s));
                 } else {
-
+                    if (!Operators.isValidOperator(s)) {
+                        throw new RuntimeException("Invalid operator: " + s);
+                    }
                     Operators.getOperation(Operators.getOperator(s)).run(stack);
-
                 }
             }
 

@@ -2,16 +2,13 @@ package xcx.calculator.rpn.stack;
 
 import org.springframework.stereotype.Service;
 import xcx.calculator.rpn.operators.Operators;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 import java.util.Stack;
 
 @Service
 public class StackServiceImpl implements StackService {
 
-    private Stack<String> stack;
+    private Stack<BigDecimal> stack;
     private String[] elements;
     private final String allOperators = Operators.getAllOperators();
 
@@ -23,14 +20,14 @@ public class StackServiceImpl implements StackService {
         return line.split("\\s");
     }
 
-    public Stack<String> convertToStack(String line) {
+    public Stack<BigDecimal> convertToStack(String line) {
 
         elements = parse(line);
 
         for (String element : elements) {
             element = element.trim();
             if (!allOperators.contains((element))) {
-                stack.push(element);
+                stack.push(new BigDecimal(element));
             }
         }
 

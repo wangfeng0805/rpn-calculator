@@ -1,16 +1,17 @@
 package xcx.calculator.rpn.operators;
 
+import java.math.BigDecimal;
 import java.util.Stack;
 
 public class MinusOperation implements Operation {
 
     @Override
-    public void run(Stack<String> stack) {
-        String firstNumber = stack.pop();
-        String secondNumber = stack.pop();
+    public void run(Stack<BigDecimal> stack) {
+        BigDecimal firstNumber = stack.pop();
+        BigDecimal secondNumber = stack.pop();
 
-        Integer calculationResult = Integer.valueOf(secondNumber) - Integer.valueOf(firstNumber);
+        BigDecimal calculationResult = secondNumber.subtract(firstNumber);
 
-        stack.push(calculationResult.toString());
+        stack.push(calculationResult);
     }
 }
