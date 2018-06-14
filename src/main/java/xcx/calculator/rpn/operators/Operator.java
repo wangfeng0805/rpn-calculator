@@ -42,6 +42,8 @@ public enum Operator {
                 return new DivideOperation();
             case CLEAR:
                 return new ClearOperation();
+            case SQRT:
+                return new SqrtOperation();
             default:
                 throw new RuntimeException("Invalid operator:" + operator);
         }
