@@ -1,70 +1,36 @@
 package xcx.calculator.rpn.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import xcx.calculator.rpn.calculator.RpnCalculator;
+import xcx.calculator.rpn.calculator.RpnCalculatorImpl;
 import xcx.calculator.rpn.exceptions.InsufficientParametersException;
-import xcx.calculator.rpn.operators.Operator;
 import xcx.calculator.rpn.output.OutputService;
-import xcx.calculator.rpn.stack.StackService;
 import java.math.BigDecimal;
 import java.util.Scanner;
 import java.util.Stack;
 
 @Component
-public class CalculatorController implements CalculatorControllerInterface {
+public class CalculatorController {
 
-    private StackService stackService;
-    private Stack<BigDecimal> stack;
     private OutputService outputService;
-    protected final Logger log = LoggerFactory.getLogger(getClass());
+    private RpnCalculator rpnCalculator;
 
-    public CalculatorController(
-            StackService stackService,
-            OutputService outputService
-    ) {
-        this.stackService = stackService;
+    public CalculatorController(OutputService outputService, RpnCalculatorImpl rpnCalculator) {
         this.outputService = outputService;
-        stack = new Stack<>();
+        this.rpnCalculator = rpnCalculator;
     }
 
-    @Override
-    public void process() {
+    public void process() throws InsufficientParametersException {
 
         Scanner scanner = new Scanner(System.in);
 
-        while(true) {
+        while(scanner.hasNextLine()) {
             String row = scanner.nextLine();
             if(row.equals("exit")) break;
-
-            String[] keywordArray = stackService.parse(row);
-            int position = 0;
-            for (String keyword : keywordArray) {
-
-                if (!Operator.getAllOperators().contains(keyword)) {
-                    stack.push(new BigDecimal(keyword));
-                } else {
-                    if (!Operator.isValidOperator(keyword)) {
-                        throw new RuntimeException("Invalid operator: " + keyword);
-                    }
-
-                    try {
-                        Operator.getOperation(Operator.getOperator(keyword)).run(stack);
-                    } catch (InsufficientParametersException e) {
-                        e.setOperator(Operator.getOperator(keyword));
-                        e.setPosition(position);
-                        System.err.println(e.getMessage());
-                        System.err.flush();
-                    }
-                }
-
-                position++;
-            }
-
+            String[] keywordArray = row.split("\\s");
+            Stack<BigDecimal> stack = rpnCalculator.calculate(keywordArray);
             outputService.print(stack);
         }
-
-
     }
 
 

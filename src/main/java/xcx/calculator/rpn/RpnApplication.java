@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import xcx.calculator.rpn.controller.CalculatorControllerInterface;
+import xcx.calculator.rpn.controller.CalculatorController;
 import xcx.calculator.rpn.exceptions.InsufficientParametersException;
 
 @SpringBootApplication
@@ -17,7 +17,7 @@ public class RpnApplication {
 
 		ConfigurableApplicationContext ctx = SpringApplication.run(RpnApplication.class, args);
 
-		CalculatorControllerInterface calculatorController = (CalculatorControllerInterface) ctx.getBean("calculatorController");
+		CalculatorController calculatorController = (CalculatorController) ctx.getBean("calculatorController");
 
 		System.out.println("\n\n[RPN RpnCalculator] Enter a white-spaced list of numbers and operators then press enter:\n>");
 		try {
