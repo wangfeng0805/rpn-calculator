@@ -20,14 +20,6 @@ public enum Operator {
         return operator;
     }
 
-    public static String getAllOperators() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Operator operator : Operator.values()) {
-            stringBuilder.append(operator.getOperator()).append(" ");
-        }
-        return stringBuilder.toString();
-    }
-
     public static boolean isValidOperator(String operator) {
 
         for (Operator validOperator : Operator.values()) {

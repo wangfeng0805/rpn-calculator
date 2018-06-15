@@ -2,7 +2,6 @@ package xcx.calculator.rpn.controller;
 
 import org.springframework.stereotype.Component;
 import xcx.calculator.rpn.calculator.RpnCalculator;
-import xcx.calculator.rpn.calculator.RpnCalculatorImpl;
 import xcx.calculator.rpn.exceptions.InsufficientParametersException;
 import xcx.calculator.rpn.output.OutputService;
 import java.math.BigDecimal;
@@ -15,7 +14,7 @@ public class CalculatorController {
     private OutputService outputService;
     private RpnCalculator rpnCalculator;
 
-    public CalculatorController(OutputService outputService, RpnCalculatorImpl rpnCalculator) {
+    public CalculatorController(OutputService outputService, RpnCalculator rpnCalculator) {
         this.outputService = outputService;
         this.rpnCalculator = rpnCalculator;
     }

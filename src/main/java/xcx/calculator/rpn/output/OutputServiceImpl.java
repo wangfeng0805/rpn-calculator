@@ -1,7 +1,6 @@
 package xcx.calculator.rpn.output;
 
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.util.Stack;
 
@@ -15,6 +14,6 @@ public class OutputServiceImpl implements OutputService {
             System.out.print(stackElement + " ");
         }
         System.out.print("]\n");
-        System.out.println("> ");
+        System.out.println(">");
     }
 }

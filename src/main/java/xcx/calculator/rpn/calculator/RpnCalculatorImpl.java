@@ -1,5 +1,6 @@
 package xcx.calculator.rpn.calculator;
 
+import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.stereotype.Component;
 import xcx.calculator.rpn.exceptions.InsufficientParametersException;
 import xcx.calculator.rpn.operators.Operator;
@@ -20,7 +21,7 @@ public class RpnCalculatorImpl implements RpnCalculator {
         int position = 0;
         for (String keyword : keywordArray) {
 
-            if (!Operator.getAllOperators().contains(keyword)) {
+            if (NumberUtils.isNumber(keyword)) {
                 stack.push(new BigDecimal(keyword));
             } else {
                 if (!Operator.isValidOperator(keyword)) {
