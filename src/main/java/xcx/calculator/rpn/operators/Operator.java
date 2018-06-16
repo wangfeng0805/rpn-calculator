@@ -56,8 +56,6 @@ public enum Operator {
                 return new ClearOperation();
             case SQRT:
                 return new SqrtOperation();
-            case UNDO:
-                return new UndoOperation();
             default:
                 throw new RuntimeException("Invalid operator:" + operator);
         }
