@@ -6,7 +6,7 @@ public class InsufficientParametersException extends Exception {
 
     private Operator operator = null;
 
-    private int position = 0;
+    private int positionIndex = -1;
 
     public InsufficientParametersException() {
     }
@@ -15,17 +15,17 @@ public class InsufficientParametersException extends Exception {
         this.operator = operator;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
+    public void setPositionIndex(int index) {
+        this.positionIndex = index;
     }
 
-    public int getPosition() {
-        return position;
+    public int getPositionIndex() {
+        return positionIndex;
     }
 
     @Override
     public String getMessage() {
 
-        return "operator " + this.operator.getOperator() + " (position: " + this.getPosition() + "): insufficient parameters";
+        return "operator " + this.operator.getOperator() + " (position: " + this.getPositionIndex() + "): insufficient parameters";
     }
 }

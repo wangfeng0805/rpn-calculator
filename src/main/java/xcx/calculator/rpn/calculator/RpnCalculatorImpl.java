@@ -7,6 +7,7 @@ import xcx.calculator.rpn.commands.ExternalCommandImpl;
 import xcx.calculator.rpn.commands.InternalCommandImpl;
 import xcx.calculator.rpn.commands.InternalCommandType;
 import xcx.calculator.rpn.exceptions.InsufficientParametersException;
+import xcx.calculator.rpn.exceptions.utils.PositionService;
 import xcx.calculator.rpn.operators.Operator;
 import xcx.calculator.rpn.operators.UndoOperation;
 import java.math.BigDecimal;
@@ -17,10 +18,12 @@ public class RpnCalculatorImpl implements RpnCalculator {
 
     private Stack<BigDecimal> stack;
     private Stack<ExternalCommand> commandHistory;
+    private PositionService positionService;
 
-    public RpnCalculatorImpl() {
+    public RpnCalculatorImpl(PositionService positionService) {
         stack = new Stack<>();
         commandHistory = new Stack<>();
+        this.positionService = positionService;
     }
 
     public Stack<BigDecimal> calculate(String[] keywordArray) {
@@ -29,7 +32,7 @@ public class RpnCalculatorImpl implements RpnCalculator {
         boolean enableCommandHistory = true;
 
         for (String keyword : keywordArray) {
-
+            positionService.setPositionIndex(position, keyword);
             ExternalCommand externalCommand = new ExternalCommandImpl();
 
             if (NumberUtils.isNumber(keyword)) {
@@ -57,9 +60,10 @@ public class RpnCalculatorImpl implements RpnCalculator {
                     }
                 } catch (InsufficientParametersException e) {
                     e.setOperator(Operator.getOperator(keyword));
-                    e.setPosition(position);
+                    e.setPositionIndex(positionService.getPositionIndex(position));
                     System.err.println(e.getMessage());
                     System.err.flush();
+                    break;
                 }
             }
 

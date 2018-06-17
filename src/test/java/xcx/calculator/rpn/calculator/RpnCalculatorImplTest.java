@@ -3,21 +3,30 @@ package xcx.calculator.rpn.calculator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import xcx.calculator.rpn.exceptions.utils.PositionService;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.util.Stack;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class RpnCalculatorImplTest {
 
     private RpnCalculator rpnCalculator;
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
+    @Mock
+    PositionService positionService;
+
     @Before
     public void setUp() throws Exception {
 
-        rpnCalculator = new RpnCalculatorImpl();
+        rpnCalculator = new RpnCalculatorImpl(positionService);
         System.setErr(new PrintStream(errContent));
     }
 
@@ -40,10 +49,11 @@ public class RpnCalculatorImplTest {
     @Test
     public void insufficientParameterInputWillPrintSystemErrorMessage() {
         // given
-        String[] keywordAraay = new String[]{"2","+"};
+        String[] keywordArray = new String[]{"1", "2", "3", "*", "5", "+", "*", "*", "6", "5"};
+        when(positionService.getPositionIndex(7)).thenReturn(15);
         // when
-        rpnCalculator.calculate(keywordAraay);
+        rpnCalculator.calculate(keywordArray);
         // then
-        assertEquals("operator + (position: 1): insufficient parameters\n", errContent.toString());
+        assertEquals("operator * (position: 15): insufficient parameters\n", errContent.toString());
     }
 }
