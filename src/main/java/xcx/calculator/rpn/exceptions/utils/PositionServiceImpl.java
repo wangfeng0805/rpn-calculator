@@ -20,10 +20,8 @@ public class PositionServiceImpl implements PositionService {
     public void setPositionIndex(Integer position, String keyword) {
         Integer keywordLength = keyword.length();
         Integer latestIndex;
-        Integer positionIndex;
-        if (position == 0) {
-            positionIndex = 1;
-        } else {
+        Integer positionIndex = 1;
+        if (position > 0) {
             latestIndex = positionMap.get(position - 1) + 1;
             positionIndex = latestIndex + keywordLength;
         }

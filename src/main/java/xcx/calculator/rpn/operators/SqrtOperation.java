@@ -14,7 +14,9 @@ public class SqrtOperation extends AbstractOperation implements Operation {
     @Override
     public void run(Stack<BigDecimal> stack, ExternalCommand externalCommand) throws InsufficientParametersException {
         BigDecimal firstNumber = popNumberFromStack(stack, externalCommand);
-        BigDecimal calculationResult = new BigDecimal(sqrt(firstNumber.doubleValue()), MathContext.DECIMAL128).setScale(15, RoundingMode.HALF_UP);
+        BigDecimal calculationResult = new BigDecimal(sqrt(firstNumber.doubleValue()), MathContext.DECIMAL128)
+                .setScale(15, RoundingMode.HALF_UP)
+                .stripTrailingZeros();
 
         stack.push(calculationResult);
         externalCommand.addInternalCommand(
