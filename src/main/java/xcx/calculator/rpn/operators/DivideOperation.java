@@ -15,7 +15,7 @@ public class DivideOperation extends AbstractOperation implements Operation {
 
         BigDecimal firstNumber = popNumberFromStack(stack, externalCommand);
         BigDecimal secondNumber = popSecondNumberFromStack(stack, firstNumber, externalCommand);
-        BigDecimal calculationResult = secondNumber.divide(firstNumber, 15, RoundingMode.UP);
+        BigDecimal calculationResult = secondNumber.divide(firstNumber, 15, RoundingMode.HALF_UP);
 
         stack.push(calculationResult);
         externalCommand.addInternalCommand(

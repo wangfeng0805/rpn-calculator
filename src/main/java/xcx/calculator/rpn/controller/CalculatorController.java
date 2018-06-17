@@ -24,8 +24,7 @@ public class CalculatorController {
         Scanner scanner = new Scanner(System.in);
 
         while(scanner.hasNextLine()) {
-            String row = scanner.nextLine();
-            if(row.equals("exit")) break;
+            String row = scanner.nextLine().trim();
             String[] keywordArray = row.split("\\s");
             Stack<BigDecimal> stack = rpnCalculator.calculate(keywordArray);
             outputService.print(stack);

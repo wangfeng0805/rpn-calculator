@@ -43,24 +43,11 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.jbehave</groupId>
-			<artifactId>jbehave-spring</artifactId>
-			<version>4.0.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jbehave</groupId>
-			<artifactId>jbehave-gherkin</artifactId>
-			<version>4.0.4</version>
-		</dependency>
-
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-
 
 	</dependencies>
 
@@ -69,16 +56,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-
-			<plugin>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.16</version>
-				<configuration>
-					<includes>
-						<include>**/JBehaveRunner.java</include>
-					</includes>
-				</configuration>
 			</plugin>
 
 		</plugins>

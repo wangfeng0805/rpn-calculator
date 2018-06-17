@@ -9,7 +9,6 @@ import xcx.calculator.rpn.commands.InternalCommandType;
 import xcx.calculator.rpn.exceptions.InsufficientParametersException;
 import xcx.calculator.rpn.operators.Operator;
 import xcx.calculator.rpn.operators.UndoOperation;
-
 import java.math.BigDecimal;
 import java.util.Stack;
 

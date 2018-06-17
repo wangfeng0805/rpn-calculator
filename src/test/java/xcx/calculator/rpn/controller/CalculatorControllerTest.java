@@ -20,7 +20,7 @@ public class CalculatorControllerTest {
     @Before
     public void setUp() throws Exception {
         calculatorController = new CalculatorController(new OutputServiceImpl(), new RpnCalculatorImpl());
-        String row = "2 3 +";
+        String row = "1 2 3 4 5 * * + sqrt undo 6 7 * undo 8 9 undo undo undo undo";
         inContent = new ByteArrayInputStream(row.getBytes());
         System.setOut(new PrintStream(outContent));
     }
@@ -37,6 +37,6 @@ public class CalculatorControllerTest {
         // when
         calculatorController.process();
         // then
-        assertEquals("stack: [ 5 ]\n>\n", outContent.toString());
+        assertEquals("stack: [ 1 62 2 60 8 3 ]\n>\n", outContent.toString());
     }
 }
